@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required.
 
 # Create your views here.
 
@@ -53,6 +54,7 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')    
 
+@login_required(login_url='/accounts/login/')
 def welcome(request):
 
     return render(request, 'index.html')
