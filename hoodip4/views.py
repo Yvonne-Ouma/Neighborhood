@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm
+from .forms import SignupForm,ProfileForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -58,4 +58,42 @@ def activate(request, uidb64, token):
 def welcome(request):
 
     return render(request, 'index.html')
+
+def profile(request):
+    current_user = request.user
+    # profile = Profile.objects.get(user=current_user)
+    user = User.objects.get(username=request.user)
+    return render(request, 'profile/profile.html', {'user': current_user, "profile": profile})
+
+
+@login_required(login_url='/accounts/login/')
+def edit_profile(request):
+    form = ProfileForm()
+    user = request.user
+    if request.user.is_authenticated():
+        if request.method == "POST":
+            try:
+                profile = user.profile
+                form = ProfileForm(instance=profile)
+                form = ProfileForm(
+                    request.POST, request.FILES, instance=profile)
+                if form.is_valid():
+                    update = form.save(commit=False)
+                    update.user = user
+                    update.save()
+            except:
+                form = ProfileForm(request.POST, request.FILES)
+                print(form.is_valid())
+                if form.is_valid():
+                    form.save()
+                    profile = Profile.objects.last()
+                    print(profile)
+                    profile.user = user
+                    profile.save()
+            return redirect('welcome')
+    else:
+        form = ProfileForm()
+
+    return render(request, 'profile/edit_profile.html', {'form': form, 'user': user})
+
 
