@@ -28,11 +28,12 @@
 
         <div style="text-align:right;" class="col-md-4">
             <img src="" alt="" style="border-radius:50%; width: 70px; height: 70px;">
-            <span><a href="" style="color: white; font-size: 20px; text-decoration: none;"><strong>Current_user</strong>:</a></span>
+            <span><a href="{% url 'edit_profile' %}" style="color: white; font-size: 20px; text-decoration: none;"><strong>Current_user</strong>:{{request.user.username}}</a></span>
         </div>
 
         <!-- search form end -->
         <div class="col-sm-4 col-md-4">
+            {% if user.is_authenticated %}
             <ul>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
@@ -47,7 +48,7 @@
                             <a href="/accounts/password/change">Change Password</a>
                         </li>
                         <li>
-                            <a href="">View Profile</a>
+                            <a href="{% url 'profile'%}">View Profile</a>
                         </li>
                         <li>
                             <a href="/logout">Logout</a>
@@ -55,10 +56,12 @@
                     </ul>
                 </li>
             </ul>
+            {% else %}
             <li>
                 <a class='btn btn-default' href="/accounts/login">Login</a>
             </li>
 
+            {% endif %}
         </div>
 
 
