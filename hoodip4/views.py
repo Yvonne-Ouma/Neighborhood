@@ -10,6 +10,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 # Create your views here.
 
@@ -61,7 +62,7 @@ def welcome(request):
 
 def profile(request):
     current_user = request.user
-    # profile = Profile.objects.get(user=current_user)
+    profile = Profile.objects.get(user=current_user)
     user = User.objects.get(username=request.user)
     return render(request, 'profile/profile.html', {'user': current_user, "profile": profile})
 
