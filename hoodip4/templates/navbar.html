@@ -12,7 +12,7 @@
 
         <!-- Adding a search form  -->
         <div class="col-sm-4 col-md-4 navbar-right">
-            <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+            <form class="navbar-form" role="search" action="">
 
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search Project" name="search">
@@ -21,14 +21,14 @@
                     </div>
                 </div>
 
-                <a href="{% url 'post_project'%}"><button type="button" class="btn btn-success">Submit Project</button></a>
+                <a href=""><button type="button" class="btn btn-success">Submit Project</button></a>
 
             </form>
         </div>
 
         <div style="text-align:right;" class="col-md-4">
             <img src="" alt="" style="border-radius:50%; width: 70px; height: 70px;">
-            <span><a href="{% url 'edit_profile' %}" style="color: white; font-size: 20px; text-decoration: none;"><strong>Current_user</strong>:{{request.user.username}}</a></span>
+            <span><a href="" style="color: white; font-size: 20px; text-decoration: none;"><strong>Current_user</strong>:{{request.user.username}}</a></span>
         </div>
 
         <!-- search form end -->
