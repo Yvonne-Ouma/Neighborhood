@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<body>
+    <h3>Post News</h3>
+    <div class="container" style="padding-top: 100px">
+        <form action="{%url 'posts'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-success btn-lg" value="Post">
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}
