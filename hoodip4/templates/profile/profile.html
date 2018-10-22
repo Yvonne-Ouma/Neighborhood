@@ -13,9 +13,11 @@
             {% if request.user.profile.profile_picture %}
             <img src="{{user.profile.profile_picture.url}}" alt="" style="border-radius:50%; width:300px; height:300px; padding:0px; margin:0px;">
             {% endif %}
-            <p>{{profile.bio}}</p>
-            <p>{{user.username}}</p>
-            <p>{{profile.user_name}}</p>
+            <p><strong>Profile Bio:</strong>{{profile.bio}}</p>
+            <p><strong>Profile Username:</strong>{{user.username}}</p>
+            <p><strong>profile name:</strong>{{profile.user_name}}</p>
+            <p><strong>User Neighborhood:</strong>{{profile.neighborhood}}</p>
+            <p><strong>User Location:</strong>{{profile.location}}</p>
 
         </div>
         <div class="col-md-6">
