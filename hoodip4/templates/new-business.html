@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{%load static%}
+{% block content %}
+
+<body>
+    <div class="container" style="padding-top: 130px;">
+
+        <div class="row">
+
+
+            <form action="{%url 'business'%}" method="post" style="font-family: 'Dosis', sans-serif;" enctype="multipart/form-data">
+                {%csrf_token%}
+
+                {% bootstrap_form form%}
+                <input id="id_myfield" type="submit" class="btn btn-success btn-lg" value="Post">
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}
