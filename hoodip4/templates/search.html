@@ -5,7 +5,7 @@
 
 
     <div class="row">
-        {% if projects %}
+        {% if businesses %}
         <h2>Found {{ businesses|length }} of searched term {{message}}</h2>
 
         {% else %}
@@ -16,14 +16,17 @@
 
     <div class="row">
 
-        {% if projects %}
+        {% if businesses %}
         {% for business in businesses %}
         <div class="col-md-6">
             <div class="panel panel-default" width=200px>
                 <div class="panel-heading">
                     <h1>{{business.business_name}}</h1>
                 </div>
-                <div class="panel-body"><p>{{business.business_email}}</p></div>
+                <div class="panel-body">
+                    <img src="{{business.business_pic.url}}" class="img-responsive" alt="Image" style='width:100%;'>
+                    <p>{{business.business_email}}</p>
+                </div>
 
                 <div class="panel-footer">
                     <p>{{business.neighborhood}}</p>

@@ -57,9 +57,15 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-    post = Posts.objects.all()
+    try:
+        bizz = Neighborhood.objects.get(pk=request.user.profile.neighborhood.id)
+        business = Business.objects.filter(neighborhood=request.user.profile.neighborhood.id)
+        post = Posts.objects.filter(location=request.user.profile.location.id)
+
+    except:
+        message = 'maze create location ama ujoin any'
     # businesses = Business.objects.all()
-    return render(request, 'index.html', {"post":post})
+    return render(request, 'index.html', locals())
 
 def profile(request):
     current_user = request.user
@@ -148,13 +154,12 @@ def search_results(request):
     if 'search' in request.GET and request.GET["search"]:
         search_term = request.GET.get('search')
         businesses = Business.filter_by_search_term(search_term)
-        print(businesses)
         message = f"{search_term}"
 
     else:
         message = "No searched project"
     #     return render(request, 'search.html', {"message": message})
-    return render(request, 'search.html', {"message": message, "businesses": businesses})
+    return render(request, 'search.html',locals())
 
 
 

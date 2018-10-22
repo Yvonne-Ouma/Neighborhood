@@ -5,6 +5,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Create your models here.
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Neighborhood(models.Model):
     range = (
@@ -32,14 +40,6 @@ class Neighborhood(models.Model):
         neighbourhoods.delete()
 
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 class Location(models.Model):
     choice_field = (
@@ -130,6 +130,7 @@ class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="images")
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, blank=True, null=True)
     business_email = models.CharField(max_length=40)
+    business_pic = models.ImageField(upload_to='business_images/', )
     
     def __str__(self):
         return self.business_name
