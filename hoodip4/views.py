@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm,ProfileForm
+from .forms import SignupForm,ProfileForm,PostForm,BusinessForm,HoodForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -10,7 +10,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import Profile,Posts,Business,Neighborhood
 
 # Create your views here.
 
@@ -57,8 +57,9 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-
-    return render(request, 'index.html')
+    post = Posts.objects.all()
+    # businesses = Business.objects.all()
+    return render(request, 'index.html', {"post":post})
 
 def profile(request):
     current_user = request.user
@@ -96,5 +97,64 @@ def edit_profile(request):
         form = ProfileForm()
 
     return render(request, 'profile/edit_profile.html', {'form': form, 'user': user})
+
+def posts(request):
+    current_user = request.user
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+            return redirect('welcome')
+
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {"form": form})  
+
+@login_required(login_url='/accounts/login/')
+def business(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+        return redirect('welcome')
+
+    else:
+        form = BusinessForm()
+    return render(request, 'new-business.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def neighborhood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = HoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+        return redirect('welcome')
+
+    else:
+        form = HoodForm()
+    return render(request, 'new-hood.html', {"form": form}) 
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    if 'search' in request.GET and request.GET["search"]:
+        search_term = request.GET.get('search')
+        businesses = Business.filter_by_search_term(search_term)
+        print(businesses)
+        message = f"{search_term}"
+
+    else:
+        message = "No searched project"
+    #     return render(request, 'search.html', {"message": message})
+    return render(request, 'search.html', {"message": message, "businesses": businesses})
+
 
 
