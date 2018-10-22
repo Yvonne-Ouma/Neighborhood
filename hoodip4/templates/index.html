@@ -5,57 +5,60 @@
 {{block.super}}
 {% block content %}
 <div class="container-fluid">
-<h3 style="padding-top: 100px;">BUSINESS</h3>
-{% for post in business %}
-<div class="col-md-6 col-md-6">
-    <div class="thumbnail">
-        <h4>{{post.business_name}}</h4>
-        <img src="{{post.business_pic.url}}" alt="" style=" box-shadow: 1px 1px 1px 1px grey; transition: all 0.3s ease 0s; cursor:
-            pointer; opacity: 0.8; width:400px ; height: 400px;">
-    </div>
-</div>
-
-
-{% endfor %}
-</div>
-<div class="container">
-{% if post %}
-<H3>POSTS</H3>
-<div class="row">
-    {% for post_item in post %}
-    <div class="col-md-4 col-md-4 col-md-4 ">
+    <h3 style="padding-top: 100px; text-align:center; font-size:30px;">BUSINESS</h3>
+    {% for post in business %}
+    <div class="col-md-6 col-md-6">
         <div class="thumbnail">
-            <h4>{{post_item.name}}</h4>
-            <a href="#"><img id="yvee" src="{{post_item.image.url}}" data-toggle="modal" data-target="#{{ post_item.id }}"
-                    alt="Image" height=400px width="400px" style=" box-shadow: 1px 1px 1px 1px grey; transition: all 0.3s ease 0s; cursor:
-    pointer; opacity: 0.8; width:400px ; height: 400px;"></a>
+            <h4><strong>Business Name:</strong>{{post.business_name}}</h4>
+            <img src="{{post.business_pic.url}}" alt="" style=" box-shadow: 1px 1px 1px 1px grey; transition: all 0.3s ease 0s; cursor:
+            pointer; opacity: 0.8; width:400px ; height: 400px;">
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" id="{{ post_item.id }}" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <h2><strong>Post:</strong>{{post_item.name}}</h2>
-                        <img src="{{post_item.image.url}}" class="img-responsive" alt="Image" style='width:100%;'>
-                        <p><strong>
-                                Project Description</strong>:{{post_item.description}}</p>
-
-                        <p><strong>Location</strong>:{{post_item.location}}</p>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
+            <p><strong>Business Email:</strong>{{post.business_email}}</p>
+            <p><strong>Bussiness Neighborhood:</strong>{{post.neighborhood}}</p>
         </div>
     </div>
+
+
     {% endfor %}
-    {% else %}
-    {{message}}
-    {%endif%}
 </div>
-{% endblock %}
+<div class="container">
+    {% if post %}
+    <H3>POSTS</H3>
+    <div class="row">
+        {% for post_item in post %}
+        <div class="col-md-4 col-md-4 col-md-4 ">
+            <div class="thumbnail">
+                <h4>{{post_item.name}}</h4>
+                <a href="#"><img id="yvee" src="{{post_item.image.url}}" data-toggle="modal" data-target="#{{ post_item.id }}"
+                        alt="Image" height=400px width="400px" style=" box-shadow: 1px 1px 1px 1px grey; transition: all 0.3s ease 0s; cursor:
+    pointer; opacity: 0.8; width:400px ; height: 400px;"></a>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" id="{{ post_item.id }}" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <h2><strong>Post:</strong>{{post_item.name}}</h2>
+                            <img src="{{post_item.image.url}}" class="img-responsive" alt="Image" style='width:100%;'>
+                            <p><strong>
+                                    Project Description</strong>:{{post_item.description}}</p>
+
+                            <p><strong>Location</strong>:{{post_item.location}}</p>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        {{message}}
+        {%endif%}
+    </div>
+    {% endblock %}

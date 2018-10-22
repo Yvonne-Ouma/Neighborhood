@@ -8,20 +8,12 @@
 </head>
 <style>
 
-    a {
+a {
 color: #69c;
 text-decoration: none;
 }
 a:hover {
 color: #f60;
-}
-h1 {
-font: 1.7em;
-line-height: 110%;
-color: #000;
-}
-p {
-
 }
 
 input {
@@ -43,7 +35,7 @@ background: #ededed
 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
 9px center;
 border: solid 1px #ccc;
-padding: 9px 10px 9px 32px;
+padding: 9px 10px 9px 2px;
 width: 55px;
 
 -webkit-border-radius: 10em;
@@ -70,27 +62,34 @@ color: #999;
 input::-webkit-input-placeholder {
 color: #999;
 }
+.navbar h2{
+overflow:hidden;
+}
+
+.navbar h2{
+display:inline-block;
+}
+
+
 </style>
 
 <body>
     <nav class="navbar navbar-inverse" style="  font-family: 'Kodchasan', sans-serif; position: fixed; z-index: 1; top: 0; width: 100%;">
 
         <!-- Adding a search form  -->
-        <div class=" navbar">
-            <div class="text-right">
-
+        <div class=" navbar" style="padding-left:50px; margin-top:-4.5vh">
+            <h2>
                 <form class="navbar-form" role="search" action="{% url 'search_results' %}">
                     <input type="search" placeholder="Search" name="search">
                 </form>
-            </div>
-            <a href="{% url 'profile' %}"><button type="button" class="btn btn-success">View Profile</button></a>
-            <a href="{% url 'posts' %}"><button type="button" class="btn btn-success">Create Post</button></a>
-            <a href="{% url 'business' %}"><button type="button" class="btn btn-success">New Business</button></a>
-            <a href="{% url 'neighborhood' %}"><button type="button" class="btn btn-success">New neighborhood</button></a>
+            </h2>
 
-            <a href="/accounts/password/change"><button type="button" class="btn btn-success">Change Password</button></a>
-
-            <a href="/logout"><button type="button" class="btn btn-success">Logout</button></a>
+            <h2><a href="{% url 'welcome' %}">NEIGHBORHOOD</a></h2>
+            <h2><a href="{% url 'profile' %}"><button type="button" class="btn btn-success">View Profile</button></a></h2>
+            <h2><a href="{% url 'posts' %}"><button type="button" class="btn btn-success">Create Post</button></a></h2>
+            <h2> <a href="{% url 'business' %}"><button type="button" class="btn btn-success">New Business</button></a></h2>
+            <h2><a href="/accounts/password/change"><button type="button" class="btn btn-success">Change Password</button></a></h2>
+            <h2><a href="/logout" ><button type="button" class="btn btn-success">Logout</button></a></h2>
         </div>
 
 
