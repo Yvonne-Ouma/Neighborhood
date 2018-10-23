@@ -24,11 +24,15 @@ Yvonne Ouma
 ```User Location:None ```
 * In this cas ```ojijo345``` is the one who has signed up.
 * A user then can file his/her creadentials.
-```Profile Bio:meme```
-```Profile Username:ojijo345```
-```profile name:katane```
-```User Neighborhood:Moringa```
-```User Location:Ayany ```
+```
+
+Profile Bio:meme
+Profile Username:ojijo345
+profile name:katane
+User Neighborhood:Moringa
+User Location:Ayany
+
+```
 
 * From the creadentials, the user is redirected to the home page where he/she will view businesses in ```Moringa```
 * The user can then create a new business within the neighborhood.
