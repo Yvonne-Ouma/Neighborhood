@@ -34,6 +34,16 @@ class Neighborhood(models.Model):
     def save_neighborhood(self):
         self.save()
 
+    def delete_neighborhood(self):
+        self.delete()
+
+    def update_neighborhood(self):
+        self.save()
+
+    def create_neighborhood(self):
+        self.save()     
+
+
     @classmethod
     def delete_neighborhood_by_id(cls, id):
         neighbourhoods = cls.objects.filter(pk=id)
@@ -58,6 +68,9 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
 
+    def update_location(self):
+        self.save()    
+
     def __str__(self):
         return self.name
 
@@ -76,6 +89,13 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+    def update_profile(self):
+        self.save()
+
+    def create_profile(self):
+        self.save()
+ 
+
 
     def __str__(self):
         return self.user_name
@@ -85,49 +105,30 @@ class Posts(models.Model):
     
     name = models.CharField(max_length=40)
     image = models.ImageField(upload_to='picture/', )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="posts")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="posts", null=True)
     description = models.TextField()
     location = models.ForeignKey(Location, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-    def save_image(self):
+    def save_post(self):
         self.save()
+
+    def delete_post(self):
+        self.delete()
+
+    def update_post(self):
+        self.save()         
 
     @classmethod
     def delete_image_by_id(cls, id):
         pictures = cls.objects.filter(pk=id)
         pictures.delete()
 
-    # @classmethod
-    # def get_image_by_id(cls, id):
-    #     pictures = cls.objects.get(pk=id)
-    #     return pictures
-
-    # @classmethod
-    # def filter_by_location(cls, location):
-    #     pictures = cls.objects.filter(location=location)
-    #     return pictures
-
-    # @classmethod
-    # def search_image(cls, search_term):
-    #     pictures = cls.objects.filter(name__icontains=search_term)
-    #     return pictures
-
-    # @classmethod
-    # def update_image(cls, id):
-    #     pictures = cls.objects.filter(id=id).update(id=id)
-    #     return pictures
-
-    # @classmethod
-    # def update_description(cls, id):
-    #     pictures = cls.objects.filter(id=id).update(id=id)
-    #     return pictures 
-
 class Business(models.Model):
     business_name = models.CharField(max_length=40)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="images")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="images",null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, blank=True, null=True)
     business_email = models.CharField(max_length=40)
     business_pic = models.ImageField(upload_to='business_images/', )
@@ -137,6 +138,15 @@ class Business(models.Model):
 
     def save_business(self):
         self.save()
+
+    def delete_business(self):
+        self.delete() 
+
+    def update_business(self):
+        self.save()  
+
+    def create_business(self): 
+        self.save()         
 
     @classmethod
     def filter_by_search_term(cls, search_term):

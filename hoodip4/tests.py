@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile,Neighborhood,Business,Location,Posts
 
 # Create your tests here.
 
@@ -26,195 +26,91 @@ class ProfileTestClass(TestCase):
         profiles = Profile.objects.all()
         self.assertFalse(len(profiles) == 1)
 
+    def test_update_method(self):
+        self.prof.save_profile()
+        self.prof.update_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile) > 0)   
+
+    def test_create_method(self):
+        self.prof.create_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile) > 0)
 
 
-class ProjectTestClass(TestCase):
+class NeighborhoodTest(TestCase):
     def setUp(self):
-        self.post=Post(name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
-
-    # def tearDown(self) :
-    #     User.objects.all().delete()
+        self.hood=Neighborhood(name="kal",neighborhood_location="Mombasa", population=8)
 
     def test_instance(self):
-        self.assertIsInstance(self.projectTest,Project)
+        self.assertIsInstance(self.hood,Neighborhood)
 
-    def test_save_project(self):
-        self.assertFalse(self.projectTest in Project.objects.all())
-        self.projectTest.save()
-        self.assertTrue(self.projectTest in Project.objects.all())
-        self.projectTest.delete()
+    def test_save_Neighborhood(self):
+        self.assertFalse(self.hood in Neighborhood.objects.all())
+        self.hood.save()
+        self.assertTrue(self.hood in Neighborhood.objects.all())
+        self.hood.delete()
 
-    def test_delete_project(self):
-        self.assertFalse(self.projectTest in Project.objects.all())
-        self.projectTest.save()
-        self.assertTrue(self.projectTest in Project.objects.all())
-        self.projectTest.delete()
+    def test_delete_Neighborhood(self):
+        self.assertFalse(self.hood in Neighborhood.objects.all())
+        self.hood.save()
+        self.assertTrue(self.hood in Neighborhood.objects.all())
+        self.hood.delete()
 
+    def test_update(self):
+        self.hood.save_neighborhood()
+        self.hood.update_neighborhood()
+        neibor = Neighborhood.objects.all()
+        self.assertTrue(len(neibor) > 0)
 
-class ReviewTestClass(TestCase):
-    def setUp(self):
-        self.review=Review(comment="wooow",design=4,usability= 6, content=7)
-
-    # def tearDown(self) :
-    #     Review.objects.all().delete()
-
-    def test_instance(self):
-        self.assertIsInstance(self.review,Review)
-
-    def test_save_review(self):
-        self.assertFalse(self.review in Review.objects.all())
-        self.review.save()
-        self.assertTrue(self.review in Review.objects.all())
-        self.review.delete()
-
-    def test_delete_review(self):
-        self.assertFalse(self.review in Review.objects.all())
-        self.review.save()
-        self.assertTrue(self.review in Review.objects.all())
-        self.review.delete()
-
-
-
-
-
-
-class NeighbourhoodTestClass(TestCase):
-    # Set up method
-    def setUp(self):
-        self.nairobi = Location.objects.create(name="nairobi")
-
-        self.test_neighbourhood = Neighbourhood.objects.create(neighbourhood_name='imagesef',
-                                population='1000',
-                                neighbourhood_location=self.nairobi,
-                                )
-
-        self.test_neighbourhood.save()
-
-    def test_save_method(self):
-        self.test_neighbourhood.save()
-        test_neighbourhoods = Neighbourhood.objects.all()
-        self.assertTrue(len(test_neighbourhoods) > 0)
-
-    # Testing save method
-    def test_save_neighbourhood(self):
-        self.assertEqual(len(Neighbourhood.objects.all()), 1)
-
-    # Tear down method
-    def tearDown(self):
-        Neighbourhood.objects.all().delete()
-
-    def test_delete_neighbourhood(self):
-        Neighbourhood.delete_image_by_id(self.test_neighbourhood.id)
-        self.assertEqual(len(Neighbourhood.objects.all()), 0)
-
-
-class ProjectTestClass(TestCase):
-    # Set up method
-    def setUp(self):
-        self.nairobi = Neighbourhood.objects.create(name="nairobi")
-
-        self.test_project = Project.objects.create(image='imagesef',
-                                                   name='cat',
-                                                   description='This is a description',
-                                                   neighbourhood_id=self.nairobi,
-                                                   )
-
-        self.test_project.save()
-
-    def test_save_method(self):
-        self.test_project.save()
-        test_projects = Project.objects.all()
-        self.assertTrue(len(test_projects) > 0)
-
-    # Testing save method
-    def test_save_project(self):
-        self.assertEqual(len(Project.objects.all()), 1)
-
-    # Tear down method
-    def tearDown(self):
-        Project.objects.all().delete()
-
-    def test_delete_project(self):
-        Project.delete_image_by_id(self.test_project.id)
-        self.assertEqual(len(Project.objects.all()), 0)
+    def test_save(self):
+        self.hood.create_neighborhood()
+        neibor = Neighborhood.objects.all()
+        self.assertTrue(len(neibor) > 0) 
 
 
 class BusinessTestClass(TestCase):
-    # Set up method
     def setUp(self):
-        self.nairobi = Neighbourhood.objects.create(name="nairobi")
-
-        self.test_business = Business.objects.create(image='imagesef',
-                                                     business_name='cat',
-                                                     business_email_address='business@gmail.com',
-                                                     neighbourhood_id=self.nairobi,
-                                                     )
-
-        self.test_business.save()
-
-    def test_save_method(self):
-        self.test_business.save()
-        test_businesses = Business.objects.all()
-        self.assertTrue(len(test_businesses) > 0)
-
-    # Testing save method
-    def test_save_business(self):
-        self.assertEqual(len(Business.objects.all()), 1)
-
-    # Tear down method
-    def tearDown(self):
-        Business.objects.all().delete()
-
-    def test_delete_image(self):
-        Business.delete_business_by_id(self.test_business.id)
-        self.assertEqual(len(Business.objects.all()), 0)
-
-
-class tagsTestClass(TestCase):
-
-    # Set up method the test for location and instantiating the location object
-
-    def setUp(self):
-        self.test_tags = tags(name='funny')
-        self.test_tags.save()
-
-        # Testing instance
+        self.business=Business(business_name="me",business_email="tyt@gmail.com",business_pic = "hoodip4/media/business_images/gjijdi.jpg")
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.test_tags, tags))
+        self.assertIsInstance(self.business,Business)
 
-        # Testing Save method
+    def test_save_business(self):
+        self.assertFalse(self.business in Business.objects.all())
+        self.business.save()
+        self.assertTrue(self.business in Business.objects.all())
+        self.business.delete()
 
-    def test_save_method(self):
-        tags = tags.objects.create(name='funny')
-        tags = tags.objects.all()
-        self.assertTrue(len(tags) > 0)
+    def test_delete_business(self):
+        self.assertFalse(self.business in Business.objects.all())
+        self.business.save()
+        self.assertTrue(self.business in Business.objects.all())
+        self.business.delete()
 
-    # Tear down method
-    def tearDown(self):
-        tags.objects.all().delete()
+    def test_update(self):
+        self.business.save_business()
+        self.business.update_business()
+        business = Business.objects.all()
+        self.assertTrue(len(business) > 0)
 
-        # Testing delete method
+    def test_create_business(self):
+        self.business.create_business()
+        business = Business.objects.all()
+        self.assertTrue(len(business) > 0)    
 
-    def test_delete_tags(self):
-        self.test_tags.delete()
-        self.assertEqual(len(tags.objects.all()), 0)
 
 
 class LocationTestClass(TestCase):
-
-    #Set up method the test for location and instantiating the location object
-
-
+  
     def setUp(self):
-        self.test_location = Location(name = 'Nairobi')
-        self.test_location.save()
+        self.location = Location(name = 'Kampala')
+        self.location.save()
 
-    #Testing instance
 
     def test_instance(self):
 
-        self.assertTrue(isinstance(self.test_location, Location))
+        self.assertTrue(isinstance(self.location, Location))
 
     #Testing Save method
 
@@ -222,53 +118,37 @@ class LocationTestClass(TestCase):
         locations = Location.objects.all()
         self.assertTrue(len(locations)>0)
 
-    # Tear down method
-    def tearDown(self):
-        Location.objects.all().delete()
-
         # Testing delete method
-
     def test_delete_location(self):
-        self.test_location.delete()
-        self.assertEqual(len(Location.objects.all()), 0)
+        self.location.delete()
+        self.assertEqual(len(Location.objects.all()), 0) 
 
+    def test_update_location(self):
+        self.location.save_location()
+        self.location.update_location()
+        location = Location.objects.all()
+        self.assertTrue(len(location) > 0)    
 
-
-class Review(TestCase):
-
+class PostsTest(TestCase):
+    # Set up method
     def setUp(self):
-
-        self.melissa = User.objects.create(username="melissa")
-        self.picture = Image.objects.create(image='image1',
-                                            user=self.melissa)
-        self.comment = Review.objects.create(comment = 'nicephoto')
-
-        self.test_review = Review.objects.create(user=self.melissa,
-                                                 image=self.picture,
-                                                 comment='nice photo')
-        self.test_review.save()
-
-    #Testing instance
+        self.post = Posts.objects.create(name="nairobi", image="hoodip4/media/picture/ghj.jpg", description="this is owesome")
 
     def test_instance(self):
-
-        self.assertTrue(isinstance(self.test_reviews, Review))
-
-    #Testing Save method
+        self.assertIsInstance(self.post,Posts)
 
     def test_save_method(self):
-        reviews = Review.objects.all()
-        self.assertTrue(len(reviews)>0)
+        post = Posts.objects.all()
+        self.assertTrue(len(post)>0)
 
-    def test_save_review(self):
-        self.assertEqual(len(Review.objects.all()), 1)
+    def test_delete_post(self):
+        self.post.delete()
+        self.assertEqual(len(Posts.objects.all()), 0)  
 
-    # Tear down method
-    def tearDown(self):
-        Review.objects.all().delete()
 
-        # Testing delete method
+    def test_update_post(self):
+        self.post.save_post()
+        self.post.update_post()
+        post = Posts.objects.all()
+        self.assertTrue(len(post) > 0)        
 
-    def test_delete_review(self):
-        self.test_review.delete()
-        self.assertEqual(len(Review.objects.all()), 0)
