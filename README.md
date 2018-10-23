@@ -1,7 +1,7 @@
 # Neighborhood-app
 
 ## Description of the app
- 
+Neighborhood-app is an application where users can post their businesses, checkout into neighborhoods and comment to businesses that they find interesting.Aside from that users can also see business from the location they in.
 
 ### Author
 Yvonne Ouma
@@ -14,6 +14,25 @@ Yvonne Ouma
 * He/She can find Contact Information for the health department and Police authorities near my neighborhood.
 * you can also create Posts that will be visible to everyone in my neighborhood
 * You can change your neighborhood when you decide to move out
+
+## How exactly does the work??
+* Immmediately a user logs in to the app it goes to the user's profile.
+```Profile Bio:None```
+```Profile Username:ojijo345```
+```profile name:None```
+```User Neighborhood:None```
+```User Location:None ```
+* In this cas ```ojijo345``` is the one who has signed up.
+* A user then can file his/her creadentials.
+```Profile Bio:meme```
+```Profile Username:ojijo345```
+```profile name:katane```
+```User Neighborhood:Moringa```
+```User Location:Ayany ```
+
+* From the creadentials, the user is redirected to the home page where he/she will view businesses in ```Moringa```
+* The user can then create a new business within the neighborhood.
+* A user can also create a new Neighborhood and a also a post.
 
 #### Getting Started
 * git clone https://github.com/Yvonne-Ouma/neighborhood.git
