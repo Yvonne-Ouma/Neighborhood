@@ -17,11 +17,16 @@ Yvonne Ouma
 
 ## How exactly does the work??
 * Immmediately a user logs in to the app it goes to the user's profile.
-```Profile Bio:None```
-```Profile Username:ojijo345```
-```profile name:None```
-```User Neighborhood:None```
-```User Location:None ```
+```
+
+Profile Bio:None
+Profile Username:ojijo345
+profile name:None
+User Neighborhood:None
+User Location:None 
+
+
+```
 * In this cas ```ojijo345``` is the one who has signed up.
 * A user then can file his/her creadentials.
 ```
